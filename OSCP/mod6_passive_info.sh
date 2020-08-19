@@ -20,7 +20,7 @@ __________whois_enumeration___________
 whois megacorpone.com
 whois 38.100.193.70		#reverse lookup 
 
-_________subdomain_enumeration___________
+__________subdomain_enumeration___________
 #pre info 
 'classless inner-domain roting:CIDR' 	#ip range for orga. represented by subnet-mask ex:192.168.1.0/24
 'Autonomous system number: ASN'			#const number represent org. traffic via internet ex:45155  
@@ -40,3 +40,28 @@ amass enum -active -d domain.com 		#finds active subdomains only
 sublist3r -d domain.com 
 
 
+__________open-source_enumeration___________
+##github as ex for open source codes 
+'serch in github with company name and others keywords as like as google dorks'
+- "uber" passwd
+- "uber" config
+- "uber" token
+...
+
+##pastebin
+'site for: leaked data, accounts ...'
+'advanced: using pastebin API by register with pro account'
+
+##stack over flow smetimes we can find parts of code help us in our enumeration
+'searching like in github'
+
+##scripts to find leaked info 
+- gitrob
+- gitleaks
+
+## sites search for any thing connected to the internet belong to the company: ips, opened ports, vulnerabilities ...
+- shodan.io   #provides searching by dorks
+- censys.io
+
+##site for check if email have been leaked
+- haveibeenpwned.com
