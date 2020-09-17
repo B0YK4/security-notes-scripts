@@ -65,3 +65,10 @@ __________open-source_enumeration___________
 
 ##site for check if email have been leaked
 - haveibeenpwned.com
+
+__________tools-and-sites-libraries____________
+##OSINT framework
+osintframework.com    #all free sites and tolls
+
+##maltego tool
+maltego   #graphical tool in kali for multi info gathering types
